@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bullet, this.transform.position, Quaternion.identity);
+            GameObject go = Instantiate(bullet, this.transform.position + (Vector3.Normalize(direction)/2), Quaternion.identity);
         }
     }
 
@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public Vector3 getDirection()
+    public Vector3 getNormalizedDirection()
     {
-        return direction;
+        return Vector3.Normalize(direction);
     }
 }

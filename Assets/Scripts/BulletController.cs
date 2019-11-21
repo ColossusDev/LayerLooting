@@ -6,30 +6,31 @@ public class BulletController : MonoBehaviour
 {
     GameObject player;
 
-    Vector3 direction;
+    Vector3 directionN;
+
+    [SerializeField] float speed = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
 
-        direction = player.GetComponent<PlayerController>().getDirection();
+        directionN = player.GetComponent<PlayerController>().getNormalizedDirection();
 
-        Debug.Log("X" + direction.x);
-        Debug.Log("Y" + direction.y);
-        Debug.Log("Z" + direction.z);
+        Debug.Log("X" + directionN.x);
+        Debug.Log("Y" + directionN.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 move = transform.position + direction * Time.deltaTime;
+        Vector3 move = transform.position + (directionN * speed) * Time.deltaTime;
 
         transform.position = move;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }
