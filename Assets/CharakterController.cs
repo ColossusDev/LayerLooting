@@ -19,6 +19,8 @@ public class CharakterController : MonoBehaviour
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     void FixedUpdate()
     {
+        faceMouse();
+
         //Store the current horizontal input in the float moveHorizontal.
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -30,5 +32,16 @@ public class CharakterController : MonoBehaviour
 
         //Call the AddForce function of our Rigidbody2D rb2d supplying movement multiplied by speed to move our player.
         rb2d.AddForce(movement * speed);
+    }
+
+    void faceMouse()
+    {
+        Vector3 mousepostion = Input.mousePosition;
+        mousepostion = Camera.main.ScreenToWorldPoint(mousepostion);
+
+        Vector2 direction = new Vector2(mousepostion.x - transform.position.x, mousepostion.y - transform.position.y);
+
+        transform.right = direction;
+
     }
 }
