@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
 
     [SerializeField] GameObject bullet;
+    [SerializeField] int munition = 6;
 
     private Rigidbody2D rigid;
     private Vector2 direction;
+
+    private GameObject lastInRange;
 
     void Start()
     {
@@ -22,7 +25,15 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject go = Instantiate(bullet, this.transform.position + (Vector3.Normalize(direction)/2), Quaternion.identity);
+            if (munition > 0)
+            {
+                GameObject go = Instantiate(bullet, this.transform.position + (Vector3.Normalize(direction) / 2), this.transform.rotation);
+                munition--;
+            }
+            else
+            {
+                // später Sound einbauen für leere Waffe
+            }
         }
     }
 
@@ -50,6 +61,7 @@ public class PlayerController : MonoBehaviour
             rigid.AddForce(Vector2.right * speed);
         }
 
+        checkForItem();
     }
 
     void faceMouse()
@@ -63,8 +75,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void checkForItem()
+    {
+        // Das ist vermutlich die unperformanteste Stelle aller Zeit #PLS FIX
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction);
+
+        if (hit.collider.gameObject.tag == "lootable" && hit.distance < 1)
+            {
+            hit.collider.gameObject.GetComponent<LootableController>().inRange();
+            lastInRange = hit.collider.gameObject;
+            }
+        else if(lastInRange != null)
+        { 
+            lastInRange.GetComponent<LootableController>().notInRange();
+            lastInRange = null;
+        }
+        
+
+    }
+
     public Vector3 getNormalizedDirection()
     {
         return Vector3.Normalize(direction);
+    }
+
+    public int getMunition()
+    {
+        return munition;
     }
 }
