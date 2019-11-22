@@ -16,9 +16,6 @@ public class BulletController : MonoBehaviour
         player = GameObject.Find("Player");
 
         directionN = player.GetComponent<PlayerController>().getNormalizedDirection();
-
-        Debug.Log("X" + directionN.x);
-        Debug.Log("Y" + directionN.y);
     }
 
     // Update is called once per frame

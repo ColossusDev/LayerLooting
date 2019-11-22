@@ -920,6 +920,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8859826012736789368, guid: ea00ad89e13366c49b84ec391676ef40,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c02ad9838d2fa71418d0ca510f591865,
+        type: 3}
+    - target: {fileID: 8859826012736789350, guid: ea00ad89e13366c49b84ec391676ef40,
+        type: 3}
+      propertyPath: munition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 519420032, guid: ea00ad89e13366c49b84ec391676ef40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -60
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1714312981, guid: ea00ad89e13366c49b84ec391676ef40, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ea00ad89e13366c49b84ec391676ef40, type: 3}
