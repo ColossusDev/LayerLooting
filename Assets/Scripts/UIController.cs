@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
 
-    GameObject player;
+    [SerializeField] GameObject player;
     [SerializeField] GameObject munText;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
+
     }
 
     // Update is called once per frame

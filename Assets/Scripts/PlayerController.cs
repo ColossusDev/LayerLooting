@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] float speed;
+    [SerializeField] float movespeed;
 
     [SerializeField] GameObject bullet;
     [SerializeField] int munition = 6;
 
+    [SerializeField] Camera cam;
+
     private Rigidbody2D rigid;
     private Vector2 direction;
+    private Vector2 movement;
 
     private GameObject lastInRange;
 
@@ -35,33 +38,21 @@ public class PlayerController : MonoBehaviour
                 // später Sound einbauen für leere Waffe
             }
         }
+
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         faceMouse();
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rigid.AddForce(Vector2.up * speed);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            rigid.AddForce(Vector2.left * speed);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            rigid.AddForce(Vector2.down * speed);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            rigid.AddForce(Vector2.right * speed);
-        }
-
         checkForItem();
+
+        rigid.MovePosition(rigid.position + movement * movespeed * Time.deltaTime);
+
+        Vector3 camPos = new Vector3(this.transform.position.x, this.transform.position.y, -10);
+        cam.transform.position = camPos;
     }
 
     void faceMouse()
@@ -81,16 +72,16 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction);
 
         if (hit.collider.gameObject.tag == "lootable" && hit.distance < 1)
-            {
+        {
             hit.collider.gameObject.GetComponent<LootableController>().inRange();
             lastInRange = hit.collider.gameObject;
-            }
-        else if(lastInRange != null)
-        { 
+        }
+        else if (lastInRange != null)
+        {
             lastInRange.GetComponent<LootableController>().notInRange();
             lastInRange = null;
         }
-        
+
 
     }
 
