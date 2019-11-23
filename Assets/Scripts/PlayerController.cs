@@ -5,12 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] float speed;
+    [SerializeField] float movespeed;
 
     [SerializeField] GameObject bullet;
+    [SerializeField] int munition = 6;
+
+    [SerializeField] Camera cam;
 
     private Rigidbody2D rigid;
     private Vector2 direction;
+    private Vector2 movement;
+
+    private GameObject lastInRange;
 
     void Start()
     {
@@ -22,34 +28,31 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject go = Instantiate(bullet, this.transform.position + (Vector3.Normalize(direction)/2), Quaternion.identity);
+            if (munition > 0)
+            {
+                GameObject go = Instantiate(bullet, this.transform.position + (Vector3.Normalize(direction) / 2), this.transform.rotation);
+                munition--;
+            }
+            else
+            {
+                // später Sound einbauen für leere Waffe
+            }
         }
+
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         faceMouse();
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rigid.AddForce(Vector2.up * speed);
-        }
+        checkForItem();
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rigid.AddForce(Vector2.left * speed);
-        }
+        rigid.MovePosition(rigid.position + movement * movespeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            rigid.AddForce(Vector2.down * speed);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            rigid.AddForce(Vector2.right * speed);
-        }
-
+        Vector3 camPos = new Vector3(this.transform.position.x, this.transform.position.y, -10);
+        cam.transform.position = camPos;
     }
 
     void faceMouse()
@@ -63,8 +66,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void checkForItem()
+    {
+        // Das ist vermutlich die unperformanteste Stelle aller Zeit #PLS FIX
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction);
+
+        if (hit.collider.gameObject.tag == "lootable" && hit.distance < 1)
+        {
+            hit.collider.gameObject.GetComponent<LootableController>().inRange();
+            lastInRange = hit.collider.gameObject;
+        }
+        else if (lastInRange != null)
+        {
+            lastInRange.GetComponent<LootableController>().notInRange();
+            lastInRange = null;
+        }
+
+
+    }
+
     public Vector3 getNormalizedDirection()
     {
         return Vector3.Normalize(direction);
+    }
+
+    public int getMunition()
+    {
+        return munition;
     }
 }

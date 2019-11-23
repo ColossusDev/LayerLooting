@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     Vector3 directionN;
 
     [SerializeField] float speed = 1;
+    [SerializeField] float dmg = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -16,9 +17,6 @@ public class BulletController : MonoBehaviour
         player = GameObject.Find("Player");
 
         directionN = player.GetComponent<PlayerController>().getNormalizedDirection();
-
-        Debug.Log("X" + directionN.x);
-        Debug.Log("Y" + directionN.y);
     }
 
     // Update is called once per frame
@@ -31,6 +29,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "enemy")
+        {
+            collision.GetComponent<EnemyScript>().gettingHit(dmg);
+        }
+
         Destroy(this.gameObject);
     }
 }
