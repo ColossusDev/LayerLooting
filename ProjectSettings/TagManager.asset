@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - lootable
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -50,4 +51,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3972895197
+    locked: 0
+  - name: InGameUI
+    uniqueID: 3827792717
     locked: 0

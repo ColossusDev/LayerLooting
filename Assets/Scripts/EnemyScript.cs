@@ -8,9 +8,15 @@ public class EnemyScript : MonoBehaviour
     GameObject player;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float movespeed;
+    [SerializeField] float wakeupDistance;
+
+    [SerializeField] float hitpoints = 10; 
+    
     private Vector2 movement;
 
     private bool activ = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,9 +52,18 @@ public class EnemyScript : MonoBehaviour
 
     void checkForPlayerInRange()
     {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < 2)
+        if (Vector3.Distance(player.transform.position, this.transform.position) < wakeupDistance)
         {
             activ = true;
+        }
+    }
+
+    public void gettingHit(float dmg)
+    {
+        hitpoints = hitpoints - dmg;
+        if (hitpoints <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

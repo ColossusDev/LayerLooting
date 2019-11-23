@@ -5,9 +5,12 @@ using UnityEngine;
 public class LootableController : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    [SerializeField] GameObject eButton;
+    SpriteRenderer eButtonRenderer;
     void Start()
     {
-        
+        eButtonRenderer = eButton.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -18,11 +21,11 @@ public class LootableController : MonoBehaviour
 
     public void inRange()
     {
-        this.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+        eButtonRenderer.enabled = true;
     }
 
     public void notInRange()
     {
-        this.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        eButtonRenderer.enabled = false;
     }
 }
