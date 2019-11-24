@@ -6,6 +6,7 @@ TagManager:
   tags:
   - lootable
   - enemy
+  - player
   layers:
   - Default
   - TransparentFX

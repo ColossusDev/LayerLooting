@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8859826012736789371}
   - component: {fileID: 1714312981}
   - component: {fileID: 929233733}
+  - component: {fileID: 929233736}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,5 +135,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 3
   bullet: {fileID: 45691540603642174, guid: a271e45d6dad14c45b046e9b5cd96e2d, type: 3}
-  munition: 1000
+  munition: 0
   cam: {fileID: 0}
+--- !u!114 &929233736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859826012736789370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93870b08755084241be29184f43ab1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFull: 0000000000
+  slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
