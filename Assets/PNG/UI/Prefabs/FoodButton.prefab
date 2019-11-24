@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4594441705159074984}
   - component: {fileID: 2926193611642122831}
   - component: {fileID: 7431636960449763037}
+  - component: {fileID: 5041710261211044988}
   m_Layer: 5
   m_Name: FoodButton
   m_TagString: Untagged
@@ -117,7 +118,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4594441705159074984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5041710261211044988}
+        m_MethodName: Use
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7431636960449763037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +144,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 5444229943423457628, guid: 90543fadc354a2040ab9c04b8864f66f, type: 3}
   player: {fileID: 0}
+--- !u!114 &5041710261211044988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2776983492486154189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40df1d499368c746948724c33c0c802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 2240104594256667467, guid: 3b64387befa601642ac2a16044000ee5, type: 3}
