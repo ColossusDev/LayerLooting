@@ -71,17 +71,19 @@ public class PlayerController : MonoBehaviour
         // Das ist vermutlich die unperformanteste Stelle aller Zeit #PLS FIX
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction);
 
-        if (hit.collider.gameObject.tag == "lootable" && hit.distance < 1)
+        if (hit == true)
         {
-            hit.collider.gameObject.GetComponent<LootableController>().inRange();
-            lastInRange = hit.collider.gameObject;
+            if (hit.collider.gameObject.tag == "lootable" && hit.distance < 1)
+            {
+                hit.collider.gameObject.GetComponent<LootableController>().inRange();
+                lastInRange = hit.collider.gameObject;
+            }
+            else if (lastInRange != null)
+            {
+                lastInRange.GetComponent<LootableController>().notInRange();
+                lastInRange = null;
+            }
         }
-        else if (lastInRange != null)
-        {
-            lastInRange.GetComponent<LootableController>().notInRange();
-            lastInRange = null;
-        }
-
 
     }
 
